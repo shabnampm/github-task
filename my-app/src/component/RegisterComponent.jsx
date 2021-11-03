@@ -15,6 +15,7 @@ export class RegisterComponent extends Component
             clas: "",
             divi: "",
             gender: "",
+            error: "",
         }
         this.handlesnamechange =this.handlesnamechange.bind(this);
         this.handlesdobchange =this.handlesdobchange.bind(this);
@@ -28,7 +29,9 @@ export class RegisterComponent extends Component
     handlesnamechange=(event) =>{
         this.setState({
             name:event.target.value.replace(/[^a-zA-Z\s]/ig,'')
+            
         })
+       
     }
 
     handlesdobchange=(event) =>{
@@ -56,23 +59,37 @@ export class RegisterComponent extends Component
     }
 
     handleSubmit = (event) => {
-        let stud={
-            name:this.state.name,
-            dob:this.state.dob,
-            cls:this.state.clas,
-            div:this.state.divi,
-            gen:this.state.gender
-
-
+        const { name }  = this.state ;
+        const { dob }  = this.state ;
+        const { clas }  = this.state ;
+        const { divi }  = this.state ;
+        const { gender }  = this.state ;
+ 
+        if(name === ''||dob === '' || clas === ''|| divi === '' || gender === '')
+        {
+            alert("Please Fill All the fields!!!");
         }
-       //alert(JSON.stringify(stud));
-       alert('You have been successfully registered!')
-       studentServices.saveStudents(stud).then(response=>{
-           console.log(response);
-             
-       })
+        else
+        {
+ 
+            let stud={
+                name:this.state.name,
+                dob:this.state.dob,
+                cls:this.state.clas,
+                div:this.state.divi,
+                gen:this.state.gender
+
+
+                }
+                //alert(JSON.stringify(stud));
+                alert('You have been successfully registered!')
+                studentServices.saveStudents(stud).then(response=>{
+                console.log(response);
+                    })
+        }
     }
-  
+ 
+       
 
 
     
@@ -84,16 +101,16 @@ export class RegisterComponent extends Component
                 <div class="row">
                 <div class="col-sm-6">
                     <form>
-                        <h3>Student Registeration</h3>
+                        <h3>STUDENT REGISTRATION</h3>
                         <p>Please fill in this form to create an account.</p>
                         <div Class="form-group">
                             <label><b>Name</b></label>
-                            <input type="text" class="form-control" placeholder="Enter Name" name="name" value={this.state.name} onChange={this.handlesnamechange} required={required}/>
+                            <input type="text" class="form-control" placeholder="Enter Name" name="name" value={this.state.name} onChange={this.handlesnamechange} />
                         </div>
                         
                         <div Class="form-group">
                             <label><b>Date Of Birth</b></label>
-                            <input type="Date" class="form-control" placeholder="Enter Date of birth" name="dob" value={this.state.dob} onChange={this.handlesdobchange} required/>
+                            <input type="Date" class="form-control" placeholder="Enter Date of birth" name="dob" value={this.state.dob} onChange={this.handlesdobchange} />
                         </div>
 
                         <div Class="form-group">
