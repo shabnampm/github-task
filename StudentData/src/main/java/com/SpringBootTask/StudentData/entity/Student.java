@@ -1,8 +1,8 @@
 package com.SpringBootTask.StudentData.entity;
 
 
+import java.util.Locale;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -44,13 +44,14 @@ public class Student
 		this.gen = gen;
 	}
 	private String name;
-	private Local dob;
-	public Local getDob() {
+	public Locale getDob() {
 		return dob;
 	}
-	public void setDob(Local dob) {
+	public void setDob(Locale dob) {
 		this.dob = dob;
 	}
+	private Locale dob;
+	
 	private String cls;
 	private String div;
 	private String gen;

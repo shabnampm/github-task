@@ -30,25 +30,30 @@ public class StudServices
 	 public int getNextSequence(String seqName)
 	    {
 	       
-	CustomSeq counter = mongo.findAndModify(
+		 		CustomSeq counter = mongo.findAndModify(
 	            query(where("_id").is(seqName)),
 	            new Update().inc("sqe",1),
 	            options().returnNew(true).upsert(true),
 	            CustomSeq.class);
-	        return counter.getSqe();
+		 		return counter.getSqe();
 	    }
 	public Student saveStud(Student s)
 	{
 		String s1=String.valueOf(ss.getNextSequence(Student.Sequences_name));
 		int i=s1.length();
-		if(i==1) {
-		String sid="R_"+"00"+s1;
-		s.setId(sid);
-		}else if(i==2) {
-		String sid="R_"+"0"+s1;
-		s.setId(sid);
-		}else {
-		s.setId("R_"+s1);
+		if(i==1) 
+		{
+			String sid="R_"+"00"+s1;
+			s.setId(sid);
+		}
+		else if(i==2) 
+		{
+			String sid="R_"+"0"+s1;
+			s.setId(sid);
+		}
+		else 
+		{
+			s.setId("R_"+s1);
 		}
 		sr.save(s);
 		return s;
